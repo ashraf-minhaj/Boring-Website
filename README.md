@@ -4,4 +4,4 @@
 ![cover](docs/screenshot.png)
 
 
-Thi uses [Boring Api](https://www.boredapi.com) to suggest activities
+Thi uses [Bored Api](https://www.boredapi.com) to suggest activities
