@@ -10,7 +10,7 @@
 ![](https://img.shields.io/badge/Terraform-1.3.3-white?style=plastic&logo=terraform)&nbsp;
 ![](https://img.shields.io/badge/html--orange?style=plastic&logo=html5)&nbsp;
 
-![diagram](docs/ss.png)
+![diagram](docs/diagram.png)
 
 Made with love by Ashraf Minhaj using **Terraform**, Hosted on **AWS s3**, Distributed using **Cloudfront**.
 
