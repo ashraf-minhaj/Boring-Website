@@ -9,6 +9,7 @@
 ### project workflow/diagram
 ![](https://img.shields.io/badge/Terraform-1.3.3-white?style=plastic&logo=terraform)&nbsp;
 ![](https://img.shields.io/badge/html--orange?style=plastic&logo=html5)&nbsp;
+![](https://img.shields.io/badge/JavaScript-a%20little-yellow?style=plastic&logo=javascript)&nbsp;
 
 ![diagram](docs/diagram.png)
 
