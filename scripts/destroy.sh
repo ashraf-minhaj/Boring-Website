@@ -1,4 +1,4 @@
-cd ./Terraform
+cd ../Terraform
 # ls -a
 echo "arg: $1"
 

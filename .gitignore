@@ -3,3 +3,5 @@ src/.DS_Store
 Terraform/.terraform.lock.hcl
 *.0_x5
 Terraform/.terraform/terraform.tfstate
+Terraform/.terraform/modules/modules.json
+Terraform/.terraform/modules/template_files/

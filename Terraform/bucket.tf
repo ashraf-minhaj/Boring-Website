@@ -1,23 +1,43 @@
-# create a bucket data source notification for lambda to be invoked by
-data "aws_s3_bucket" "s3_bucket" {
+resource "aws_s3_bucket" "s3_bucket" {
   bucket = "${var.bucket_name}"   
-  # policy = data.aws_iam_policy_document.website_policy.json
-  # website {
-  #   index_document = "index.html"
-  #   error_document = "index.html"
-  #   }
 }
 
 # making the s3 bucket private 
 resource "aws_s3_bucket_acl" "s3_bucket_acl" {
-  bucket = data.aws_s3_bucket.s3_bucket.id
-  acl    = "public-read"
+  bucket = aws_s3_bucket.s3_bucket.id
+  acl    = "private"
 }
 
-resource "aws_s3_bucket_object" "objects" {
-  for_each = fileset("../src/", "*")
-  bucket = data.aws_s3_bucket.s3_bucket.id
-  key = each.value
-  source = "../src/${each.value}"
-  etag = filemd5("../src/${each.value}")
+# make the objects public
+resource "aws_s3_bucket_public_access_block" "access_block" {
+  bucket = aws_s3_bucket.s3_bucket.id
+  block_public_acls = false 
+}
+
+# to provision files into the bucket
+module "template_files" {
+  source = "hashicorp/dir/template"
+  base_dir = "../src"
+}
+
+resource "aws_s3_object" "objects" {
+  for_each = module.template_files.files
+
+  bucket = aws_s3_bucket.s3_bucket.id
+  key = each.key
+  content_type = each.value.content_type
+
+  source = each.value.source_path
+
+  content = each.value.content
+
+  etag = each.value.digests.md5
+}
+
+resource "aws_s3_bucket_website_configuration" "static_site" {
+  bucket = aws_s3_bucket.s3_bucket.bucket
+
+  index_document {
+    suffix = "index.html"
+  }
 }
