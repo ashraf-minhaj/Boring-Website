@@ -55,6 +55,6 @@ func pingUrl(url) string {
 	if err != nil {
 		log.Fatalln(err)
 	}
-	log.Println(resp.StatusText)
-	return resp.StatusText
+	log.Println(resp.StatusText())
+	return resp.StatusText()
 }
