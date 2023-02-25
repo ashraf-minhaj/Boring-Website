@@ -131,3 +131,15 @@ workflows:
           requires:
             - Destroy-Approval
 
+  # production_workflow:
+  #   jobs:
+  #     - hold:
+  #         name: Are-You-Sure
+  #         type: approval
+  #         filters:
+  #           branches:
+  #             only: main
+  #     - apply_infrastructure:
+  #         environment: dev
+  #           requires:
+  #             - Are-You-Sure
