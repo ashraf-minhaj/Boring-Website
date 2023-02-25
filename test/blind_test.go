@@ -26,6 +26,11 @@ func TestInfrastructure(t *testing.T) {
 			"cloudfront_cdn":         "cdn-dev",
 			"cloudfront_price_class": "PriceClass_All",
 		},
+		BackendConfig: map[string]interface{}{
+			"bucket": "test-states-min",
+			"key":    "boring/test/boring.tfstate",
+			"region": "ap-south-1",
+		},
 	})
 
 	// Clean up resources at the end of the test.
