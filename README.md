@@ -1,9 +1,6 @@
 # Are you bored and don't know what to do? Well, Create and Visit the boring website!
  Click on the `I don't know what to do` and get a suggestion of acitivities you can try.
 
-## DevOps tools 
-
-![diagram](docs/full-flow.png)
 -----------
 
 <div align="center">
