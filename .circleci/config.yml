@@ -125,7 +125,7 @@ workflows:
           name: Destroy-Approval
           type: approval
           requires:
-            - apply
+            - apply_infrastructure
       - destroy_infrastructure:
           environment: dev
           requires:
