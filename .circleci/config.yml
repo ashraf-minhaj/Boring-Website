@@ -27,6 +27,9 @@ jobs:
           name: check aws caller
           command: aws sts get-caller-identity
       - run:
+          name: Init go mod
+          command: go mod init blindtest; go mod tidy
+      - run:
           name: Blind Test
           command: cd test; go test -v
 
