@@ -33,7 +33,11 @@ jobs:
           name: Blind Test
           command: cd test; go test -v
 
-  apply_infrastructure: 
+  apply_infrastructure:
+    parameters:
+      environment: 
+        type: string
+        default: dev
     docker:
       - image: circleci/golang:1.16
     executor: aws-cli/default
@@ -57,19 +61,23 @@ jobs:
           command: aws sts get-caller-identity
       - run:
           name: Init
-          command: cd Terraform; terraform init
+          command: ccd scripts; bash init.sh << parameters.environment >>
       - run:
           name: Plan
-          command: cd Terraform; terraform plan
+          command: cd scripts; bash plan.sh << parameters.environment >>
       - run:
           name: Apply
-          command: cd Terraform; terraform apply -auto-approve
+          command: cd scripts; bash apply.sh << parameters.environment >>
       - persist_to_workspace:
             root: .               
             paths:
               - .     
 
   destroy_infrastructure: # name of your job
+    parameters:
+      environment: 
+        type: string
+        default: dev
     docker:
       - image: circleci/golang:1.16
     executor: aws-cli/default
@@ -106,18 +114,20 @@ workflows:
                 - /^ops\/.*/
                 - /^dev\/.*/
 
-  # stage_workflow:
-  #   jobs:
-  #     - install_dependencies
-  #     - test_job:
-  #         requires:
-  #           - install_dependencies
-  #     - hold:
-  #         name: Destroy-Approval
-  #         type: approval
-  #         requires:
-  #           - test_job
-  #     - destroy:
-  #         requires:
-  #           - Destroy-Approval
+  stage_workflow:
+    jobs:
+      - apply_infrastructure:
+          environment: dev
+          filters:
+            branches:
+              only: develop
+      - hold:
+          name: Destroy-Approval
+          type: approval
+          requires:
+            - apply
+      - destroy_infrastructure:
+          environment: dev
+          requires:
+            - Destroy-Approval
 
