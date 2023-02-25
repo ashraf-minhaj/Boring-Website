@@ -9,11 +9,11 @@ resource "aws_s3_bucket_acl" "s3_bucket_acl" {
   # acl             = "private"
 }
 
-# # make the objects public
-# resource "aws_s3_bucket_public_access_block" "access_block" {
-#   bucket            = aws_s3_bucket.s3_bucket.id
-#   block_public_acls = false 
-# }
+# make the objects public
+resource "aws_s3_bucket_public_access_block" "access_block" {
+  bucket            = aws_s3_bucket.s3_bucket.id
+  block_public_acls = false 
+}
 
 # to provision files into the bucket
 module "template_files" {
