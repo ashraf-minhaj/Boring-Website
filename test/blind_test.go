@@ -1,5 +1,7 @@
 /* apply infrastructure and check -
  * if dns url returns 200
+ *
+ * go mod tidy
  */
 
 package test
