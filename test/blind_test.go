@@ -51,9 +51,10 @@ func TestInfrastructure(t *testing.T) {
 
 func pingUrl(url string) int {
 	// ping in the cdn url
-	resp, err := http.Get(url)
+	good_url := "https://" + url
+	resp, err := http.Get(good_url)
 	if err != nil {
-		log.Fatalln(err)
+		log.Println(err)
 	}
 	log.Println(resp.StatusCode)
 	return resp.StatusCode
