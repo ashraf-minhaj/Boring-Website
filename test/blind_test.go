@@ -9,10 +9,11 @@ package test
 
 import (
 	"log"
+	"net/http"
 	"testing"
 
 	"github.com/gruntwork-io/terratest/modules/terraform"
-	// "github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/assert"
 )
 
 func TestInfrastructure(t *testing.T) {
@@ -44,4 +45,16 @@ func TestInfrastructure(t *testing.T) {
 
 	cdn_url := terraform.Output(t, terraformOptions, "cdn_url")
 	log.Println(cdn_url)
+	assert.Equal(t, "OK", pingUrl(cdn_url))
+
+}
+
+func pingUrl(url) string {
+	// ping in the cdn url
+	resp, err := http.Get(url)
+	if err != nil {
+		log.Fatalln(err)
+	}
+	log.Println(resp.StatusText)
+	return resp.StatusText
 }
