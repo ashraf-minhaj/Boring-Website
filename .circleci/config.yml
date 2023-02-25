@@ -61,7 +61,7 @@ jobs:
           command: aws sts get-caller-identity
       - run:
           name: Init
-          command: ccd scripts; bash init.sh << parameters.environment >>
+          command: cd scripts; bash init.sh << parameters.environment >>
       - run:
           name: Plan
           command: cd scripts; bash plan.sh << parameters.environment >>
@@ -96,12 +96,12 @@ jobs:
           aws-access-key-id: aws_access_key_id
           aws-secret-access-key: aws_secret_access_key
           aws-region: region
-      - run:
-          name: Init
-          command: cd Terraform; terraform init
+      # - run:
+      #     name: Init
+      #     command: cd scripts; bash init.sh << parameters.environment >>
       - run:
           name: Destroy
-          command: cd Terraform; terraform destroy -auto-approve         
+          command: cd scripts; bash destroy.sh << parameters.environment >>  
 
 
 workflows:
