@@ -2,6 +2,7 @@
  * if dns url returns 200
  *
  * go mod tidy
+ * go test -v
  */
 
 package test
