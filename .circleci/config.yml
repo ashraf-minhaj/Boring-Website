@@ -30,7 +30,7 @@ jobs:
           name: Blind Test
           command: cd test; go test -v
 
-  apply_infrastructure: # name of your job
+  apply_infrastructure: 
     docker:
       - image: circleci/golang:1.16
     executor: aws-cli/default
