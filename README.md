@@ -1,6 +1,7 @@
 # Are you bored and don't know what to do? Well, Create and Visit the boring website!
  Click on the `I don't know what to do` and get a suggestion of acitivities you can try.
 
+A static website on AWS s3, provisioned by Terraform, Shell scripts and Tested by Go.
 -----------
 
 <div align="center">
